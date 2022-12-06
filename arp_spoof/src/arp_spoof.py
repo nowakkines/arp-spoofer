@@ -4,7 +4,6 @@ import scapy.all as scapy
 from time import sleep
 import sys
 
-
 def get_mac(ip):
     arp_request = scapy.ARP(pdst=ip)
     broadcast = scapy.Ether(dst='ff:ff:ff:ff:ff:ff')
