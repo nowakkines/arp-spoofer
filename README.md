@@ -7,7 +7,7 @@ In computer networking, ARP spoofing, ARP cache poisoning, or ARP poison routing
 ARP spoofing may allow an attacker to intercept data frames on a network, modify the traffic, or stop all traffic. Often the attack is used as an opening for other attacks, such as denial of service, man in the middle, or session hijacking attacks.[2]
 
 The attack can only be used on networks that use ARP, and requires attacker have direct access to the local network segment to be attacked.[3]
-by [asus-rgb-led](https://github.com/nowakkines/arp-spoofer)
+
 
 
 
